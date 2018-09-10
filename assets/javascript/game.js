@@ -82,6 +82,14 @@ function setupGame() {
     guessedChar = [];
 }
 
+// Function that adds spaces at the beginning of each string in an array.
+function addSpaces(arr) {
+    for (i = 0; i < arr.length; i++) {
+        arr[i] = " " + arr[i];
+    }
+    return arr;
+}
+
 // Initialize game and start keypress style loop event listener type thingy lol.
 setupGame();
 document.onkeyup = function(event) {
@@ -92,27 +100,27 @@ document.onkeyup = function(event) {
     // Checks that the letter pressed is in the alphabet
     if (alphabet.indexOf(currentLetter) >= 0) {
         // Checks if letter has already been guessed.
-        if (guessedChar.indexOf(currentLetter) === -1) {
-            // This fills in blanks of the current word for the letter guessed.
+        if (guessedChar.indexOf(currentLetter) === -1) {        // This fills in blanks of the current word for the letter guessed.
             blankChanger(currentLetter, currentWord);
-            // If the letter guessed is not in the word, subtract one from guesses.
-            if (currentWord.indexOf(currentLetter) === -1) {
-                --guessAmount;
+            if (currentWord.indexOf(currentLetter) === -1) {    // If the letter guessed is not in the word,
+                --guessAmount;                                  // subtract one from guesses.
             } else {
-                winChecker.pop();
-            }
-            guessedChar.push(currentLetter);
+                winChecker.pop();                               // Remove one item from winChecker array when
+            }                                                   // correct letter detected in current word.
+            guessedChar.push(currentLetter);                    // Add the key pressed to 'guessedChar' array.
         }
 
     }
-    guessedCharText.textContent = guessedChar;
-    guessAmountText.textContent = guessAmount;
 
-    if (guessAmount <= 0) {
-        losses++;
-        setupGame();
-    } else if (winChecker.length <= 0) {
-        wins++
+
+    guessedCharText.textContent = addSpaces(guessedChar);      // Update html to show guessedChar and guessAmount
+    guessAmountText.textContent = guessAmount;                 // left after keypress and add spaces to guessedChar array.
+
+    if (guessAmount <= 0) {                         // This if else statement determines you player loses after guessAmount reaches 0 or
+        losses++;                                   // if the length of winChecker reaches 0. This works by subtracting 1 element from
+        setupGame();                                // winChecker array each time a correct letter is guessed. Creating a counter, that 
+    } else if (winChecker.length <= 0) {            // when reaching 0 player has won. After determining win or loss, adds 1 to appropriate
+        wins++                                      // counter, and then resets game using 'setupGame()' function.
         setupGame();
     }
 }
