@@ -6,6 +6,13 @@ var gameLosses = document.getElementById("losses");
 var guessedCharText = document.getElementById("already-guessed");
 var guessAmountText = document.getElementById("guesses-left");
 
+// Setting up html audio elements.
+var startSound = document.getElementById("sfx-start");
+var correctSound = document.getElementById("sfx-correct");
+var wrongSound = document.getElementById("sfx-wrong")
+var winSound = document.getElementById("sfx-win");
+var loseSound = document.getElementById("sfx-lose");
+
 // Data structure used to store different words that are randomly selected for the player to guess.
 var wordLibrary = [
     "uranus",
@@ -54,6 +61,7 @@ function blankChanger(letter, word) {
     for (i = 0; i < word.length; i++) {
         if (word[i] === letter) {
             document.getElementById("span" + i).textContent = letter;
+            correctSound.play();
         }
     }
 }
@@ -93,6 +101,7 @@ function setupGame() {
 
 // Initialize game and start keypress style loop event listener type thingy lol.
 setupGame();
+// startSound.play();
 document.onkeyup = function(event) {
 
     // Sets current key press to var called "currentLetter".
@@ -104,7 +113,8 @@ document.onkeyup = function(event) {
         if (guessedChar.indexOf(currentLetter) === -1) {        // This fills in blanks of the current word for the letter guessed.
             blankChanger(currentLetter, currentWord);
             if (currentWord.indexOf(currentLetter) === -1) {    // If the letter guessed is not in the word,
-                --guessAmount;                                  // subtract one from guesses.
+                --guessAmount;
+                wrongSound.play();                              // subtract one from guesses.
             } else {
                 winChecker.pop();                               // Remove one item from winChecker array when
             }                                                   // correct letter detected in current word.
@@ -115,13 +125,16 @@ document.onkeyup = function(event) {
 
 
     guessedCharText.textContent = guessedChar;      // Update html to show guessedChar and guessAmount
-    guessAmountText.textContent = guessAmount;                 // left after keypress and add spaces to guessedChar array.
+    guessAmountText.textContent = guessAmount;      // left after keypress and add spaces to guessedChar array.
 
     if (guessAmount <= 0) {                         // This if else statement determines you player loses after guessAmount reaches 0 or
         losses++;                                   // if the length of winChecker reaches 0. This works by subtracting 1 element from
         setupGame();                                // winChecker array each time a correct letter is guessed. Creating a counter, that 
-    } else if (winChecker.length <= 0) {            // when reaching 0 player has won. After determining win or loss, adds 1 to appropriate
-        wins++                                      // counter, and then resets game using 'setupGame()' function.
+        wrongSound.pause();                         // when reaching 0 player has won. After determining win or loss, adds 1 to appropriate
+        loseSound.play();                           // counter, and then resets game using 'setupGame()' function.
+    } else if (winChecker.length <= 0) { 
+        wins++                        
         setupGame();
+        winSound.play();
     }
 }
