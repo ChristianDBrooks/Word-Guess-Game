@@ -15,10 +15,8 @@ var loseSound = document.getElementById("sfx-lose");
 
 // Data structure used to store different words that are randomly selected for the player to guess.
 var wordLibrary = [
-    "uranus",
-    "pluto",
-    "mars",
-    "galactic", "universe"
+    "uranus", "pluto", "mars", "galactic", "universe", "orbit", "supernova", "hubble", "astronaut", "meteorite",
+    "aerospace","telescope", "moon", "earth", "saturn", "cyborg", "venus", "eclipse", "explorer", "planet"
 ];
 
 // Store number of Wins.
@@ -61,7 +59,7 @@ function blankChanger(letter, word) {
     for (i = 0; i < word.length; i++) {
         if (word[i] === letter) {
             document.getElementById("span" + i).textContent = letter;
-            correctSound.play();
+            correctSound.play();                                                    // *SOUND* CORRECT
         }
     }
 }
@@ -111,10 +109,10 @@ document.onkeyup = function(event) {
     if (alphabet.indexOf(currentLetter) >= 0) {
         // Checks if letter has already been guessed.
         if (guessedChar.indexOf(currentLetter) === -1) {        // This fills in blanks of the current word for the letter guessed.
-            blankChanger(currentLetter, currentWord);
-            if (currentWord.indexOf(currentLetter) === -1) {    // If the letter guessed is not in the word,
-                --guessAmount;
-                wrongSound.play();                              // subtract one from guesses.
+            blankChanger(currentLetter, currentWord);           // If the letter guessed is not in the word,
+            if (currentWord.indexOf(currentLetter) === -1) {    // subtract one from guesses.
+                --guessAmount;                                  
+                wrongSound.play();                              // *SOUND* WRONG
             } else {
                 winChecker.pop();                               // Remove one item from winChecker array when
             }                                                   // correct letter detected in current word.
@@ -131,10 +129,10 @@ document.onkeyup = function(event) {
         losses++;                                   // if the length of winChecker reaches 0. This works by subtracting 1 element from
         setupGame();                                // winChecker array each time a correct letter is guessed. Creating a counter, that 
         wrongSound.pause();                         // when reaching 0 player has won. After determining win or loss, adds 1 to appropriate
-        loseSound.play();                           // counter, and then resets game using 'setupGame()' function.
+        loseSound.play();       // *SOUND* LOSE        counter, and then resets game using 'setupGame()' function.
     } else if (winChecker.length <= 0) { 
         wins++                        
         setupGame();
-        winSound.play();
+        winSound.play();        // *SOUND* WIN
     }
 }
