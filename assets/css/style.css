@@ -1,3 +1,7 @@
+.hidden {
+    display: none;
+}
+
 body {
     background: url(../images/9c074cf5ab833cd1d72aa024f5a405da.jpg) no-repeat fixed center;
     font-family: 'Orbitron', sans-serif;
@@ -6,3 +10,22 @@ body {
 h1, div, p {
     color: white;
 }
+
+#load-screen {
+    position: fixed; 
+    top: -50%; 
+    left: -50%; 
+    width: 200%; 
+    height: 200%;
+  }
+#load-screen img {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    margin: auto; 
+    min-width: 50%;
+    min-height: 50%;
+  }
+

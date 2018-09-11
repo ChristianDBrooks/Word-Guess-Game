@@ -1,4 +1,3 @@
-
 // Setting up html doc variables for js to interact with them.
 var gamepara = document.getElementById("placeHolder");
 var gameWins = document.getElementById("wins");
@@ -7,11 +6,23 @@ var guessedCharText = document.getElementById("already-guessed");
 var guessAmountText = document.getElementById("guesses-left");
 
 // Setting up html audio elements.
-var startSound = document.getElementById("sfx-start");
+var loadSound = document.getElementById("sfx-load");
 var correctSound = document.getElementById("sfx-correct");
 var wrongSound = document.getElementById("sfx-wrong")
 var winSound = document.getElementById("sfx-win");
 var loseSound = document.getElementById("sfx-lose");
+
+// Set variable and function for hiding elements.
+var main = document.getElementById("main");
+
+
+function loadFunction() {
+    document.getElementById("load-screen").className = "hidden";
+    main.className = "class", "container pt-5 mt-5";
+}
+
+// loadSound.play(); **GOOGLES POLICY BLOCKS THIS SOUNDS FROM PLAYING**
+window.setTimeout(loadFunction, 4500);
 
 // Data structure used to store different words that are randomly selected for the player to guess.
 var wordLibrary = [

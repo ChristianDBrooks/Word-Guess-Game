@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="pt-5 mt-5">
-    <audio id="sfx-start">
-        <source src="assets/sounds/start.mp3" type="audio/mpeg">
+    <!-- <audio autoplay>
+        <source src=>
+    </audio> -->
+    <audio id="sfx-load">
+        <source src="assets/sounds/loading.mp3" type="audio/mpeg">
     </audio>
     <audio id="sfx-correct">
             <source src="assets/sounds/correct.mp3" type="audio/mpeg">
@@ -24,9 +27,13 @@
         <source src="assets/sounds/loss.mp3" type="audio/mpeg">
     </audio>
 
-    <div class="container pt-5 mt-5">
-        <div class="row pt-5 mt-4">
-            <div class="col align-self-center">
+    <div id="load-screen">
+        <img src="assets/images/loading-clean.gif">
+    </div>
+
+    <div class="container hidden" id="main">
+        <div class="row pt-5 mt-5">
+            <div class="col align-self-center pt-5 mt-5">
                 <h1 class="text-center">Cyber Hack</h1>
                 <p class="text-center pt-3" id="placeHolder"></p>
                 <div class="text-center" id="gameStats">
